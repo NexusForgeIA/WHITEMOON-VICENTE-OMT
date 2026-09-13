@@ -281,6 +281,10 @@ footer .brand img{height:110px}
   }
   .msgs{ min-height:0; }               /* que el area de mensajes pueda encoger y hacer scroll */
   .fab{ right:16px; bottom:16px; }     /* el boton queda justo debajo del chat, sin taparlo */
+  /* chips en una sola fila con scroll horizontal: no roban alto al saludo */
+  .chips{ flex-wrap:nowrap; overflow-x:auto; -webkit-overflow-scrolling:touch; scrollbar-width:none; }
+  .chips::-webkit-scrollbar{ display:none; }
+  .chip{ flex:0 0 auto; white-space:nowrap; }
 }
 /* movil con poca altura (teclado abierto, horizontal): el chat aprovecha todo el alto visible */
 @media(max-width:600px) and (max-height:520px){
