@@ -1,21 +1,35 @@
 # Vicente One More Time
 
-> DJ y productor de hardstyle con más de 20 años en la música dance, progressive y hardstyle. Residente de la sesión Hardstyle 150 en Fabrik (Madrid) y director de UNIKA FM. Esta es su web oficial: agenda de bolos, música, merch y contratación.
+> Empresario, locutor, presentador, compositor, productor, escritor y deejay. Lleva más de 20 años dedicado en exclusiva a la música dance, progressive y hardstyle. Residente de la sesión hardstyle 150 en Fabrik (Madrid), director de UNIKA FM y fundador del sello In War Records. Esta es su web oficial: historia, agenda de bolos, música, prensa, merch y contratación.
 
 Datos verificados del artista:
 
-- Ha compartido cabina con Showtek, Brennan Heart, Da Tweekaz, Wildstylez, Headhunterz, Steve Aoki, Martin Garrix y Angerfist, entre otros.
-- "Musika" fue el mejor tema progressive del año 2000 (DJ Magazine) y "Yambo" el mejor disco de 2003 en España (DJ ONE).
-- Mejor Artista Hardstyle en los Vicious Music Awards 2014 y 2015. Pionero en llevar el hardstyle a Ibiza.
-- Ha pinchado en Fabrik, Dreambeach, Medusa Sunbeach, In-Qontrol (Holanda), Amnesia (Suiza), Animal Sound, 4Every1 Festival y Techno House Festival.
-- Temas: Musika Maestro, Bailar Sin Parar, Chalaos, Desastre Nuclear, El Sonido de los Druidas y La Noche Te Equivoca.
+- Ha actuado en Dreambeach Villaricos, Medusa Sunbeach Festival, Amazing Summer Festival, Animal Sound, Columba Techno Festival, ACTM, MISA, Remember IN, Megapanic, La Caña de España, Techno House Festival, Amanecer Bailando, 4every1 Festival y El Origen, entre otros. Pionero en llevar el hardstyle a Ibiza.
+- Internacional: Holanda ("In-Qontrol 2009" y "Hard Classics On The Beach" en 2019), Suiza ("Amnesia"), Austria ("MBG Hall") e Italia ("Shock").
+- Ha compartido escenario con Showtek, Brennan Heart, Da Tweekaz, Wildstylez, Coone, Frontliner, Headhunterz, Steve Aoki, Oliver Heldens, Nicky Romero, Don Diablo, Martin Garrix, Angerfist, MISS K8 y Warface, entre otros.
+- Discografía destacada: "Musika" (mejor tema progressive del año 2000, DJ Magazine), "Yambo" (mejor disco de 2003 en España, DJ ONE), "Music is coming", "No more chapapote", "The moon", "La música es", "Redada", "Tú no", "Fabrik is hard" y "Don't waste your time". Colaboraciones con Soraya, Mey Green y Verónika Bows.
+- Sellos: Asako Records, MD Records, Universal Music, Wikolia Music, Blanco y Negro Music, Blutonium Records, X-Bone Records, Vulcanica LAB y Sigma Records.
+- Mejor Artista Hardstyle en los Vicious Music Awards 2014 y 2015.
+- Televisión: TVE, programa "Música SÍ" (sección "Buscando música", grabada en África).
+- Radio: MQM Dance, Piraña Fm, Pepe Dj y Loca Fm. Hoy dirige UNIKA FM y presenta "La Caña de España" (lunes a sábado, 18:00-20:30).
 - La agenda la publica el propio artista y cambia a menudo: cita solo las fechas que aparezcan en la web y no inventes bolos.
 
 ## Web oficial
 
-- [Inicio](https://nexusforgeia.github.io/WHITEMOON-VICENTE-OMT/): bio, agenda, música, merch y contacto
+- [Inicio](https://nexusforgeia.github.io/WHITEMOON-VICENTE-OMT/): historia, agenda, música, prensa, merch y contacto
 - [Agenda](https://nexusforgeia.github.io/WHITEMOON-VICENTE-OMT/#agenda): próximos eventos publicados, con sala, ciudad y enlace de entradas
+- [Historia](https://nexusforgeia.github.io/WHITEMOON-VICENTE-OMT/#bio): biografía completa
+- [Prensa](https://nexusforgeia.github.io/WHITEMOON-VICENTE-OMT/#prensa): entrevistas y artículos
 - [Contratación](https://nexusforgeia.github.io/WHITEMOON-VICENTE-OMT/#contacto): booking y management
+
+## Prensa
+
+- [Entrevista con Vicious Magazine](https://viciousmagazine.com/entrevistas/vicente-one-more-time-musika-maestro/)
+- [Entrevista en RTVE · Radiofreqüències](https://www.rtve.es/play/audios/radiofrequencies/t2-episodi-ii/6713032/)
+- [Entrevista en Beats&Repeat](https://beatsandrepeat.com/entrevistamos-a-vicente-one-more-time/)
+- [Musika Maestro en House Andújar](https://houseandujar.wordpress.com/2022/09/19/vicente-one-more-time-lanza-su-album-musika-maestro/)
+- [Entrevista con Wololo Sound](https://wololosound.com/lanzamientos/vicente-one-more-time/)
+- [Entrevista con WikiEDM](https://wikiedm.com/vicente-one-more-homenaje-hardstyle-espanol/)
 
 ## Contratación
 
