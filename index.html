@@ -128,10 +128,6 @@ header.scrolled{background:rgba(5,4,10,.82);backdrop-filter:blur(14px);border-bo
 .ag-empty a{color:var(--neon2)}
 .fl-txt{font-family:'Syncopate';font-weight:700;font-size:1.5rem;text-align:center;color:rgba(255,255,255,.92);text-shadow:0 2px 20px rgba(0,0,0,.5);padding:0 14px;line-height:1.1}
 .note{font-size:.76rem;color:var(--muted);margin-top:26px;font-style:italic;opacity:.8}
-.panel-cta{margin-top:34px;display:flex;gap:14px;align-items:center;flex-wrap:wrap;background:rgba(168,85,255,.07);border:1px dashed var(--line);border-radius:14px;padding:22px 24px}
-.panel-cta .ic{font-size:1.7rem}
-.panel-cta div b{color:var(--neon2)}
-.panel-cta div{font-size:.92rem;color:var(--muted)}
 
 /* MUSIC */
 .mz{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:18px;margin-bottom:40px}
@@ -293,11 +289,6 @@ footer .brand img{height:110px}
       <p>Dónde pincha Vicente. Cada evento se actualiza al instante desde el panel — con su flyer, fecha, sala y enlace a entradas.</p>
     </div>
     <div class="ag-grid" id="agGrid"><div class="ag-empty" role="status">Cargando agenda…</div></div>
-
-    <div class="panel-cta">
-      <span class="ic">🎛️</span>
-      <div><b>El panel del artista:</b> Vicente entra, sube el flyer, pone fecha/sala/entradas y publica. La web y el asistente IA se actualizan solos — sin tocar código, sin depender de nadie.</div>
-    </div>
   </div>
 </section>
 
@@ -410,10 +401,11 @@ footer .brand img{height:110px}
   </div>
 </div>
 
+<script src="assets/config.js"></script>
 <script>
 /* ---- AGENDA: Supabase (clave publishable pública; el RLS solo deja leer estado=publicado) ---- */
-const SB_URL='https://mlaqtniujnvfxcvcourm.supabase.co';
-const SB_KEY='sb_publishable_6no6BuOgiA_2nonTJntAuQ_DTqEgrcV';
+const SB_URL=window.VOMT_CONFIG.SUPABASE_URL;
+const SB_KEY=window.VOMT_CONFIG.SUPABASE_ANON_KEY;
 const MESES=['ENE','FEB','MAR','ABR','MAY','JUN','JUL','AGO','SEP','OCT','NOV','DIC'];
 const IG='<a href="https://www.instagram.com/vicenteonemoretime/" target="_blank" rel="noopener">Instagram</a>';
 let EVENTS=[];
