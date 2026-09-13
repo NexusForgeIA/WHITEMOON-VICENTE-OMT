@@ -121,6 +121,11 @@ header.scrolled{background:rgba(5,4,10,.82);backdrop-filter:blur(14px);border-bo
 .fl2{background:radial-gradient(circle at 70% 30%,#00e5ff,#062033 70%)}
 .fl3{background:radial-gradient(circle at 50% 80%,#a855ff,#1a0733 70%)}
 .fl4{background:radial-gradient(circle at 20% 70%,#c6ff00,#14210a 70%)}
+.ev .flyer img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.ev .tk.off{color:var(--muted)}
+.ag-empty{grid-column:1/-1;background:rgba(168,85,255,.07);border:1px dashed var(--line);border-radius:14px;padding:26px 24px;color:var(--muted)}
+.ag-empty b{color:var(--text)}
+.ag-empty a{color:var(--neon2)}
 .fl-txt{font-family:'Syncopate';font-weight:700;font-size:1.5rem;text-align:center;color:rgba(255,255,255,.92);text-shadow:0 2px 20px rgba(0,0,0,.5);padding:0 14px;line-height:1.1}
 .note{font-size:.76rem;color:var(--muted);margin-top:26px;font-style:italic;opacity:.8}
 .panel-cta{margin-top:34px;display:flex;gap:14px;align-items:center;flex-wrap:wrap;background:rgba(168,85,255,.07);border:1px dashed var(--line);border-radius:14px;padding:22px 24px}
@@ -287,8 +292,7 @@ footer .brand img{height:110px}
       <h2 class="sec-title">Próximos <em>eventos</em></h2>
       <p>Dónde pincha Vicente. Cada evento se actualiza al instante desde el panel — con su flyer, fecha, sala y enlace a entradas.</p>
     </div>
-    <div class="ag-grid" id="agGrid"></div>
-    <p class="note" id="agNote">◆ Datos de ejemplo para la demo. En producción, Vicente los gestiona desde su panel privado y el agente IA los conoce al instante.</p>
+    <div class="ag-grid" id="agGrid"><div class="ag-empty" role="status">Cargando agenda…</div></div>
 
     <div class="panel-cta">
       <span class="ic">🎛️</span>
@@ -407,15 +411,15 @@ footer .brand img{height:110px}
 </div>
 
 <script>
-/* ---- DATA (demo · en producción viene del panel/Supabase) ---- */
-const EVENTS = [
-  {d:"18",m:"OCT",fl:"fl1",name:"Hardstyle 150",venue:"Fabrik",city:"Madrid",soon:true},
-  {d:"01",m:"NOV",fl:"fl2",name:"Remember IN",venue:"Sala Macumba",city:"Madrid",soon:false},
-  {d:"22",m:"NOV",fl:"fl3",name:"Amanecer Bailando",venue:"IFEMA",city:"Madrid",soon:false},
-  {d:"13",m:"DIC",fl:"fl4",name:"4every1 Festival",venue:"Recinto Ferial",city:"Alicante",soon:false},
-  {d:"31",m:"DIC",fl:"fl1",name:"Fin de Año Hard",venue:"Fabrik",city:"Madrid",soon:false},
-  {d:"17",m:"ENE",fl:"fl2",name:"La Caña de España Live",venue:"UNIKA FM",city:"Madrid",soon:false},
-];
+/* ---- AGENDA: Supabase (clave publishable pública; el RLS solo deja leer estado=publicado) ---- */
+const SB_URL='https://mlaqtniujnvfxcvcourm.supabase.co';
+const SB_KEY='sb_publishable_6no6BuOgiA_2nonTJntAuQ_DTqEgrcV';
+const MESES=['ENE','FEB','MAR','ABR','MAY','JUN','JUL','AGO','SEP','OCT','NOV','DIC'];
+const IG='<a href="https://www.instagram.com/vicenteonemoretime/" target="_blank" rel="noopener">Instagram</a>';
+let EVENTS=[];
+const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const safeUrl=u=>/^https?:\/\//i.test(u||'')?u:'';
+const fechaCorta=f=>{const[,m,d]=f.split('-');return `${d} ${MESES[+m-1]}`;};
 const TRACKS = [
   {t:"Musika Maestro",img:"https://vicenteonemoretime.com/wp-content/uploads/2022/04/Portada-musika-maestra-300x300.png"},
   {t:"Bailar Sin Parar",img:"https://vicenteonemoretime.com/wp-content/uploads/2022/04/PORTADA-BAILAR-SIN-PARAR-300x300.png"},
@@ -426,19 +430,38 @@ const TRACKS = [
 ];
 
 /* render agenda */
-document.getElementById('agGrid').innerHTML = EVENTS.map(e=>`
+const agGrid=document.getElementById('agGrid');
+function renderAgenda(){
+  if(!EVENTS.length){agGrid.innerHTML=`<div class="ag-empty" role="status"><b>Nuevas fechas muy pronto.</b> Sigue a Vicente en ${IG} para enterarte el primero.</div>`;return;}
+  agGrid.innerHTML=EVENTS.map((e,i)=>{
+    const [,m,d]=e.fecha.split('-'), tk=safeUrl(e.ticket_url), fl=safeUrl(e.flyer_url), lugar=[e.sala,e.ciudad].filter(Boolean).join(' · ');
+    const badge=i===0?'<div class="badge soon">Próximo</div>':(e.destacado?'<div class="badge">Destacado</div>':'');
+    return `
   <article class="ev">
-    <div class="flyer ${e.fl}">
-      <div class="date"><div class="d">${e.d}</div><div class="m">${e.m}</div></div>
-      ${e.soon?'<div class="badge soon">Próximo</div>':'<div class="badge">Entradas</div>'}
-      <div class="fl-txt">${e.name.toUpperCase()}</div>
+    <div class="flyer ${fl?'':'fl'+(i%4+1)}">
+      <time class="date" datetime="${esc(e.fecha)}"><div class="d">${d}</div><div class="m">${MESES[+m-1]}</div></time>
+      ${badge}
+      ${fl?`<img src="${esc(fl)}" alt="Flyer de ${esc(e.nombre)}" width="800" height="600" loading="lazy" decoding="async">`:`<div class="fl-txt">${esc(e.nombre.toUpperCase())}</div>`}
     </div>
     <div class="body">
-      <h3>${e.name}</h3>
-      <div class="venue">📍 ${e.venue} · ${e.city}</div>
-      <div class="foot"><span class="city">${e.city.toUpperCase()}</span><a href="#" class="tk">Entradas ▸</a></div>
+      <h3>${esc(e.nombre)}</h3>
+      ${lugar?`<div class="venue">📍 ${esc(lugar)}</div>`:''}
+      <div class="foot"><span class="city">${esc((e.ciudad||'').toUpperCase())}</span>${tk?`<a href="${esc(tk)}" class="tk" target="_blank" rel="noopener">Entradas ▸</a>`:'<span class="tk off">Entradas pronto</span>'}</div>
     </div>
-  </article>`).join('');
+  </article>`;}).join('');
+}
+async function loadAgenda(){
+  const hoy=new Date().toLocaleDateString('sv-SE',{timeZone:'Europe/Madrid'}); // YYYY-MM-DD: oculta eventos pasados
+  try{
+    const r=await fetch(`${SB_URL}/rest/v1/vomt_eventos?select=id,fecha,nombre,sala,ciudad,ticket_url,flyer_url,destacado&estado=eq.publicado&fecha=gte.${hoy}&order=fecha.asc,created_at.asc`,{headers:{apikey:SB_KEY}});
+    if(!r.ok) throw new Error('HTTP '+r.status);
+    EVENTS=await r.json(); renderAgenda();
+  }catch(err){
+    console.error('[VOMT] agenda',err);
+    agGrid.innerHTML=`<div class="ag-empty" role="alert">No hemos podido cargar la agenda ahora mismo. Consulta las próximas fechas en ${IG}.</div>`;
+  }
+}
+loadAgenda();
 
 /* render music */
 document.getElementById('mz').innerHTML = TRACKS.map(t=>`
@@ -468,20 +491,21 @@ const chat=document.getElementById('chat'), msgs=document.getElementById('msgs')
 document.getElementById('fab').addEventListener('click',()=>{chat.classList.toggle('open'); if(!msgs.dataset.init){boot();}});
 document.getElementById('chatX').addEventListener('click',()=>chat.classList.remove('open'));
 function add(txt,who){const d=document.createElement('div');d.className='msg '+who;d.innerHTML=txt;msgs.appendChild(d);msgs.scrollTop=msgs.scrollHeight;}
-const SUG=["¿Próximos eventos?","¿Entradas para Fabrik?","¿Dónde escucho tu música?","Contratar a Vicente"];
+const SUG=["¿Próximos eventos?","¿Dónde compro entradas?","¿Dónde escucho tu música?","Contratar a Vicente"];
 function renderChips(){chips.innerHTML=SUG.map(s=>`<span class="chip">${s}</span>`).join('');
   chips.querySelectorAll('.chip').forEach(c=>c.addEventListener('click',()=>handle(c.textContent)));}
 function boot(){msgs.dataset.init="1";add("¡Hey! Soy el asistente de Vicente One More Time 🎧 Puedo decirte dónde pincha, ayudarte con entradas o con contrataciones. ¿Qué necesitas?","bot");renderChips();}
-function nextEvents(n=3){return EVENTS.slice(0,n).map(e=>`• <b>${e.d} ${e.m}</b> — ${e.name} · ${e.venue} (${e.city})`).join("<br>");}
+function nextEvents(n=3){return EVENTS.slice(0,n).map(e=>`• <b>${fechaCorta(e.fecha)}</b> — ${esc(e.nombre)}${e.sala?' · '+esc(e.sala):''}${e.ciudad?' ('+esc(e.ciudad)+')':''}`).join("<br>");}
 function handle(q){
   add(q,"me");
   const t=q.toLowerCase();
   setTimeout(()=>{
     let r;
     if(t.includes("evento")||t.includes("bolo")||t.includes("agenda")||t.includes("pincha")||t.includes("próximo")||t.includes("proximo"))
-      r=`Estos son sus próximos bolos:<br><br>${nextEvents(4)}<br><br>¿Te reservo entradas para alguno? 🎟️`;
+      r=EVENTS.length?`Estos son sus próximos bolos:<br><br>${nextEvents(4)}<br><br>¿Quieres el enlace de entradas de alguno? 🎟️`:`Ahora mismo no hay fechas publicadas. Sigue a Vicente en ${IG} para enterarte el primero.`;
     else if(t.includes("entrada")||t.includes("fabrik")||t.includes("ticket"))
-      r=`El próximo en <b>Fabrik (Madrid)</b> es el <b>18 OCT — Hardstyle 150</b>. Te paso el enlace de entradas y, si quieres, te aviso de futuras fechas. ¿Te dejo el link?`;
+      {const c=EVENTS.find(e=>safeUrl(e.ticket_url));
+       r=c?`Las próximas entradas a la venta: <b>${fechaCorta(c.fecha)} — ${esc(c.nombre)}</b>${c.sala?' en '+esc(c.sala):''}. <a style="color:var(--neon2)" href="${esc(c.ticket_url)}" target="_blank" rel="noopener">Comprar entradas ▸</a>`:`Todavía no hay entradas a la venta para las próximas fechas. Sigue a Vicente en ${IG} para no perdértelas.`;}
     else if(t.includes("música")||t.includes("musica")||t.includes("escuch")||t.includes("spotify")||t.includes("canci"))
       r=`Puedes escuchar toda su música en la sección <b>Música</b> de la web y en <a style="color:var(--neon2)" href="https://open.spotify.com/artist/2fBNX2F6x9P2tdJGKbTaPa" target="_blank">Spotify</a>. Himnos como “Musika”, “Chalaos” o “La Noche Te Equivoca” 🔥`;
     else if(t.includes("contrat")||t.includes("booking")||t.includes("mánager")||t.includes("manager")||t.includes("precio"))
