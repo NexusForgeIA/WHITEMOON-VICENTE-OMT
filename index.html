@@ -69,7 +69,7 @@ header.scrolled{background:rgba(5,4,10,.82);backdrop-filter:blur(14px);border-bo
 /* foto: artista a la derecha; la izquierda queda para logo y texto */
 .hero-media{position:absolute;top:0;right:0;bottom:0;width:64%;z-index:-1;
   -webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 46%);mask-image:linear-gradient(90deg,transparent 0%,#000 46%)}
-.hero-media img{width:100%;height:100%;object-fit:cover;object-position:center 25%;filter:saturate(.7) brightness(.82) contrast(1.08)}
+.hero-media img{width:100%;height:100%;object-fit:cover;object-position:var(--hero-pos,center 25%);filter:saturate(.7) brightness(.82) contrast(1.08)}
 .hero-media::after{content:"";position:absolute;inset:0;background:
   linear-gradient(180deg,rgba(5,4,10,.65) 0%,rgba(5,4,10,0) 22%,rgba(5,4,10,0) 60%,var(--bg) 100%)}
 .hero-inner{position:relative;z-index:2;width:100%;min-width:0}
@@ -212,12 +212,14 @@ footer .brand img{height:110px}
   .hero{min-height:auto;align-items:flex-start;padding:38vh 0 56px}
   .hero-media{width:100%;top:48px;bottom:auto;height:min(78vh,640px);
     -webkit-mask-image:linear-gradient(180deg,transparent 0%,#000 14%,#000 62%,transparent 100%);mask-image:linear-gradient(180deg,transparent 0%,#000 14%,#000 62%,transparent 100%)}
-  .hero-media img{object-position:68% 0}
+  .hero-media img{object-position:var(--hero-pos-m,68% 0)}
   .hero-media::after{background:linear-gradient(180deg,rgba(5,4,10,0) 40%,rgba(5,4,10,.7) 85%)}
   .hero-logo{width:min(58vw,240px);margin:0 0 18px -4px}
   .hero .tag{letter-spacing:.2em;font-size:.58rem;margin-bottom:18px}
   .hero p.sub{font-size:1rem;margin:0 0 26px}
   .hero-actions .btn{flex:1 1 100%;justify-content:center}
+  /* el FAB se oculta mientras los CTA del hero están en pantalla */
+  .fab.is-hidden{opacity:0;visibility:hidden;transform:scale(.6);pointer-events:none;animation:none}
 }
 </style>
 </head>
@@ -247,6 +249,9 @@ footer .brand img{height:110px}
 
 <!-- HERO -->
 <section class="hero" id="inicio">
+  <!-- FOTO HERO: para cambiarla sustituye assets/hero-vicente.jpg (escritorio, 1200-1600px de ancho)
+       y assets/hero-vicente-m.jpg (móvil, ~800px) y actualiza width/height. Si cambia el encuadre,
+       ajusta el foco con style="--hero-pos:center 25%;--hero-pos-m:68% 0" en .hero-media -->
   <div class="hero-media">
     <picture>
       <source media="(max-width:600px)" srcset="assets/hero-vicente-m.jpg" width="744" height="800">
@@ -442,6 +447,11 @@ document.getElementById('mz').innerHTML = TRACKS.map(t=>`
     <div class="play">▶</div>
     <div class="ov"><span>${t.t}</span></div>
   </div>`).join('');
+
+/* FAB: en móvil no tapa el CTA principal del hero */
+const fabBtn=document.getElementById('fab'), heroCta=document.querySelector('.hero-actions');
+const fabCheck=()=>{const r=heroCta.getBoundingClientRect();fabBtn.classList.toggle('is-hidden',r.bottom>0&&r.top<innerHeight);};
+addEventListener('scroll',fabCheck,{passive:true}); addEventListener('resize',fabCheck); fabCheck();
 
 /* marquee duplicate */
 const mq=document.getElementById('mq'); mq.innerHTML+=mq.innerHTML;
