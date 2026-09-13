@@ -410,10 +410,11 @@ footer .brand img{height:110px}
   </div>
 </div>
 
+<script src="assets/config.js"></script>
 <script>
 /* ---- AGENDA: Supabase (clave publishable pública; el RLS solo deja leer estado=publicado) ---- */
-const SB_URL='https://mlaqtniujnvfxcvcourm.supabase.co';
-const SB_KEY='sb_publishable_6no6BuOgiA_2nonTJntAuQ_DTqEgrcV';
+const SB_URL=window.VOMT_CONFIG.SUPABASE_URL;
+const SB_KEY=window.VOMT_CONFIG.SUPABASE_ANON_KEY;
 const MESES=['ENE','FEB','MAR','ABR','MAY','JUN','JUL','AGO','SEP','OCT','NOV','DIC'];
 const IG='<a href="https://www.instagram.com/vicenteonemoretime/" target="_blank" rel="noopener">Instagram</a>';
 let EVENTS=[];

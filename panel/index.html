@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Panel del artista · Vicente One More Time</title>
+<meta name="robots" content="noindex, nofollow, noarchive">
+<meta name="googlebot" content="noindex, nofollow">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob: https://mlaqtniujnvfxcvcourm.supabase.co; connect-src 'self' https://mlaqtniujnvfxcvcourm.supabase.co wss://mlaqtniujnvfxcvcourm.supabase.co; base-uri 'self'; form-action 'self'; object-src 'none'">
+<link rel="icon" href="../assets/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700&family=Syncopate:wght@700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#05040a; --bg2:#0b0916; --panel:#100c1e;
+  --neon:#ff1f8f; --neon2:#00e5ff; --neon3:#a855ff; --lime:#c6ff00;
+  --text:#f4f2ff; --muted:#a49fc4; --line:rgba(168,85,255,.22); --danger:#ff4d6d;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+[hidden]{display:none!important}
+body{background:var(--bg);color:var(--text);font-family:'Sora',system-ui,sans-serif;line-height:1.5;min-height:100vh}
+h1,h2{font-family:'Syncopate','Sora',sans-serif;text-transform:uppercase;letter-spacing:.06em;line-height:1.15}
+a{color:var(--neon2)}
+.bggrid{position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:radial-gradient(1000px 600px at 85% -10%,rgba(168,85,255,.16),transparent 60%),radial-gradient(800px 600px at 0% 30%,rgba(0,229,255,.08),transparent 55%),radial-gradient(800px 700px at 50% 120%,rgba(255,31,143,.12),transparent 60%)}
+.shell{position:relative;z-index:1;max-width:1200px;margin:0 auto;padding:24px 16px 72px}
+
+/* login / estados */
+.center-card{max-width:420px;margin:8vh auto 0;background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:32px 28px;text-align:center}
+.login-logo{width:132px;height:auto;margin:0 auto 18px;display:block;filter:drop-shadow(-3px 0 12px rgba(255,31,143,.5)) drop-shadow(3px 0 16px rgba(0,229,255,.3))}
+.center-card h1{font-size:1.15rem;margin-bottom:8px}
+.lead{color:var(--muted);margin-bottom:22px;font-size:.95rem}
+
+/* formularios */
+form{text-align:left}
+label{display:block;font-size:.78rem;font-weight:600;letter-spacing:.04em;color:var(--muted);margin:14px 0 6px}
+input:not([type=checkbox]),select{width:100%;background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:9px;padding:11px 14px;color:var(--text);font:inherit;font-size:1rem;min-height:46px}
+input[type=file]{padding:10px;font-size:.86rem}
+input[type=date]{color-scheme:dark}
+select option{background:var(--bg2)}
+input::placeholder{color:#7d7899}
+input:focus-visible,select:focus-visible,button:focus-visible,a:focus-visible{outline:2px solid var(--neon2);outline-offset:2px}
+.check{display:flex;align-items:center;gap:10px;color:var(--text);font-size:.92rem}
+.check input{width:18px;height:18px;accent-color:var(--neon)}
+.hint,.small{font-size:.8rem;color:var(--muted);margin-top:6px}
+.msg{min-height:1.3em;font-size:.88rem;margin-top:12px}
+.msg.error{color:#ff8fa8}
+.msg.ok{color:var(--lime)}
+
+/* botones */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:46px;padding:0 22px;border-radius:8px;border:0;font:700 .76rem 'Sora',sans-serif;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;text-decoration:none;transition:transform .15s,box-shadow .2s,border-color .2s}
+.btn:disabled{opacity:.6;cursor:progress}
+.btn-primary{background:linear-gradient(90deg,var(--neon),var(--neon3));color:#fff;box-shadow:0 10px 30px -12px rgba(255,31,143,.8)}
+.btn-primary:hover:not(:disabled){transform:translateY(-1px)}
+.btn-ghost{background:rgba(255,255,255,.05);border:1px solid var(--line);color:var(--text)}
+.btn-ghost:hover{border-color:var(--neon2)}
+.btn-sm{min-height:40px;padding:0 14px;font-size:.68rem}
+#loginBtn{width:100%;margin-top:16px}
+.btn-s{min-height:36px;padding:0 12px;border-radius:7px;border:1px solid var(--line);background:rgba(255,255,255,.04);color:var(--text);font:600 .74rem 'Sora',sans-serif;cursor:pointer;transition:border-color .2s,background .2s}
+.btn-s:hover{border-color:var(--neon2)}
+.btn-s:disabled{opacity:.5;cursor:progress}
+.btn-s.danger{color:#ff8fa8;border-color:rgba(255,77,109,.35)}
+.btn-s.danger.armed{background:var(--danger);color:#fff;border-color:var(--danger)}
+
+/* panel */
+.topbar{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding-bottom:18px;border-bottom:1px solid var(--line);margin-bottom:24px}
+.topbar .brand img{height:52px;width:auto;display:block}
+.who{display:flex;flex-direction:column;margin-right:auto;min-width:0}
+.who span{font-family:'Syncopate';font-size:.66rem;letter-spacing:.2em;color:var(--neon2);text-transform:uppercase}
+.who b{font-size:.85rem;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.grid{display:grid;grid-template-columns:minmax(0,400px) minmax(0,1fr);gap:24px;align-items:start}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:24px}
+#formCard{position:sticky;top:16px}
+.card h2{font-size:.92rem}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.flyer-preview{display:flex;align-items:flex-end;gap:12px;margin-top:10px}
+.flyer-preview img{width:110px;height:138px;object-fit:cover;border-radius:8px;border:1px solid var(--line)}
+.form-actions{display:flex;gap:10px;margin-top:14px;flex-wrap:wrap}
+.form-actions .btn-primary{flex:1}
+.list-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap}
+.list{list-style:none;margin-top:16px;display:flex;flex-direction:column;gap:12px}
+.item{display:grid;grid-template-columns:72px minmax(0,1fr) auto;gap:14px;align-items:center;padding:12px;border:1px solid var(--line);border-radius:12px;background:rgba(255,255,255,.02)}
+.item.past{opacity:.55}
+.thumb{width:72px;height:90px;border-radius:8px;overflow:hidden;background:linear-gradient(135deg,rgba(255,31,143,.3),rgba(168,85,255,.25));display:flex;align-items:center;justify-content:center;font-size:.62rem;color:var(--muted);text-align:center}
+.thumb img{width:100%;height:100%;object-fit:cover}
+.when{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-family:'Syncopate';font-size:.64rem;letter-spacing:.14em;color:var(--neon2)}
+.ev-name{font-size:1rem;font-weight:700;margin:4px 0 2px;overflow-wrap:anywhere}
+.where{font-size:.85rem;color:var(--muted)}
+.tklink{font-size:.78rem}
+.tag{font-family:'Sora';font-size:.58rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:3px 7px;border-radius:5px}
+.tag.past{background:rgba(255,255,255,.1);color:var(--muted)}
+.tag.dest{background:var(--neon);color:#fff}
+.side{display:flex;flex-direction:column;align-items:flex-end;gap:8px}
+.badge{display:inline-block;font-size:.64rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:5px 9px;border-radius:6px}
+.badge.publicado{background:var(--lime);color:#05040a}
+.badge.borrador{background:rgba(255,255,255,.06);color:var(--muted);border:1px dashed var(--muted)}
+.actions{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
+.empty{padding:22px;border:1px dashed var(--line);border-radius:12px;color:var(--muted);text-align:center}
+.empty.error{color:#ff8fa8}
+
+.toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,16px);opacity:0;pointer-events:none;background:var(--bg2);border:1px solid var(--lime);color:var(--text);padding:12px 18px;border-radius:10px;font-size:.9rem;z-index:10;transition:opacity .2s,transform .2s;max-width:calc(100vw - 32px)}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+.toast.error{border-color:var(--danger)}
+
+@media(max-width:900px){.grid{grid-template-columns:1fr}#formCard{position:static}}
+@media(max-width:600px){
+  .item{grid-template-columns:60px minmax(0,1fr)}
+  .thumb{width:60px;height:76px}
+  .side{grid-column:1/-1;align-items:stretch}
+  .side .badge{align-self:flex-start}
+  .actions{justify-content:stretch}
+  .actions .btn-s{flex:1 1 auto}
+  .row2{grid-template-columns:1fr}
+}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="bggrid" aria-hidden="true"></div>
+<main class="shell">
+
+  <section id="view-cargando" class="center-card" role="status"><p>Comprobando sesión…</p></section>
+
+  <section id="view-login" class="center-card" hidden>
+    <img src="../assets/logo-vomt.svg" alt="Vicente One More Time" width="448" height="466" class="login-logo">
+    <h1>Panel del artista</h1>
+    <p class="lead">Gestiona tu agenda: fechas, flyers y entradas.</p>
+    <form id="loginForm">
+      <label for="email">Email</label>
+      <input id="email" name="email" type="email" autocomplete="username" required>
+      <label for="password">Contraseña</label>
+      <input id="password" name="password" type="password" autocomplete="current-password" required>
+      <p id="loginError" class="msg error" role="alert"></p>
+      <button id="loginBtn" class="btn btn-primary" type="submit">Entrar</button>
+    </form>
+  </section>
+
+  <section id="view-denegado" class="center-card" hidden>
+    <h1>Sin permiso</h1>
+    <p id="deniedMsg" class="lead"></p>
+    <p class="small" style="margin-bottom:18px">Sesión iniciada como <b id="deniedEmail"></b></p>
+    <button class="btn btn-ghost" type="button" data-logout>Cerrar sesión</button>
+  </section>
+
+  <section id="view-panel" hidden>
+    <header class="topbar">
+      <a href="../" class="brand"><img src="../assets/logo-vomt.svg" alt="Ir a la web de Vicente One More Time" width="448" height="466"></a>
+      <div class="who"><span>Panel del artista</span><b id="userEmail"></b></div>
+      <a class="btn btn-ghost btn-sm" href="../#agenda" target="_blank" rel="noopener">Ver web ↗</a>
+      <button id="logoutBtn" class="btn btn-ghost btn-sm" type="button" data-logout>Cerrar sesión</button>
+    </header>
+
+    <div class="grid">
+      <section id="formCard" class="card" aria-labelledby="formTitle">
+        <h2 id="formTitle">Nuevo evento</h2>
+        <form id="eventForm">
+          <div class="row2">
+            <div><label for="fecha">Fecha *</label><input id="fecha" name="fecha" type="date" required></div>
+            <div><label for="estado">Estado</label>
+              <select id="estado" name="estado">
+                <option value="borrador">Borrador</option>
+                <option value="publicado">Publicado</option>
+              </select>
+            </div>
+          </div>
+          <label for="nombre">Nombre del evento *</label>
+          <input id="nombre" name="nombre" maxlength="120" required>
+          <div class="row2">
+            <div><label for="sala">Sala</label><input id="sala" name="sala" maxlength="120"></div>
+            <div><label for="ciudad">Ciudad</label><input id="ciudad" name="ciudad" maxlength="80"></div>
+          </div>
+          <label for="ticket_url">Enlace de entradas</label>
+          <input id="ticket_url" name="ticket_url" type="url" inputmode="url" placeholder="https://…">
+          <label for="flyer">Flyer</label>
+          <input id="flyer" name="flyer" type="file" accept="image/jpeg,image/png,image/webp">
+          <p class="hint">JPG, PNG o WebP · máx. 5 MB</p>
+          <div id="flyerPreview" class="flyer-preview" hidden>
+            <img id="flyerImg" alt="Vista previa del flyer">
+            <button id="flyerRemove" class="btn-s" type="button">Quitar flyer</button>
+          </div>
+          <label class="check"><input id="destacado" name="destacado" type="checkbox"> Destacado</label>
+          <p id="formMsg" class="msg" role="status" aria-live="polite"></p>
+          <div class="form-actions">
+            <button id="saveBtn" class="btn btn-primary" type="submit">Crear evento</button>
+            <button id="cancelEdit" class="btn btn-ghost" type="button" hidden>Cancelar</button>
+          </div>
+        </form>
+      </section>
+
+      <section class="card" aria-labelledby="listTitle">
+        <div class="list-head"><h2 id="listTitle">Tus eventos</h2><span id="eventCount" class="small"></span></div>
+        <p class="small">En la web solo salen los <b>publicados</b> de hoy en adelante. Pasar un evento a <b>borrador</b> lo oculta al instante.</p>
+        <ul id="eventList" class="list" data-state="loading"></ul>
+      </section>
+    </div>
+  </section>
+</main>
+
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+<script src="../assets/config.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.116.0/dist/umd/supabase.js" integrity="sha384-iLddHTLokph6Omwoyid4XKxHaWa6w41BnoEj0q5oOrzmYPpHIKt1wyjReA7s//pP" crossorigin="anonymous"></script>
+<script src="panel.js"></script>
+</body>
+</html>
