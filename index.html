@@ -71,6 +71,8 @@ section{position:relative}
 
 /* NAV */
 header{position:fixed;top:0;left:0;right:0;z-index:50;transition:.3s}
+/* sobre la foto del hero (antes de hacer scroll) el navbar lleva su propio fundido oscuro para mantener el contraste */
+header:not(.scrolled){background:linear-gradient(180deg,rgba(5,4,10,.78) 0%,rgba(5,4,10,.45) 60%,rgba(5,4,10,0) 100%)}
 header.scrolled{background:rgba(5,4,10,.82);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
 .nav{display:flex;align-items:center;justify-content:space-between;height:76px}
 .brand{display:inline-flex;align-items:center}
@@ -89,10 +91,10 @@ header.scrolled{background:rgba(5,4,10,.82);backdrop-filter:blur(14px);border-bo
 .hero{min-height:100vh;min-height:100svh;display:flex;align-items:flex-end;position:relative;z-index:1;overflow:hidden;padding:110px 0 8vh}
 /* foto: artista a la derecha; la izquierda queda para logo y texto */
 .hero-media{position:absolute;top:0;right:0;bottom:0;width:64%;z-index:-1;
-  -webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 46%);mask-image:linear-gradient(90deg,transparent 0%,#000 46%)}
-.hero-media img{width:100%;height:100%;object-fit:cover;object-position:var(--hero-pos,center 25%);filter:saturate(.7) brightness(.82) contrast(1.08)}
+  -webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 var(--hero-fade,46%));mask-image:linear-gradient(90deg,transparent 0%,#000 var(--hero-fade,46%))}
+.hero-media img{width:100%;height:100%;object-fit:cover;object-position:var(--hero-pos,center 25%);filter:var(--hero-filter,saturate(.7) brightness(.82) contrast(1.08))}
 .hero-media::after{content:"";position:absolute;inset:0;background:
-  linear-gradient(180deg,rgba(5,4,10,.65) 0%,rgba(5,4,10,0) 22%,rgba(5,4,10,0) 60%,var(--bg) 100%)}
+  linear-gradient(180deg,rgba(5,4,10,.9) 0%,rgba(5,4,10,.78) 9%,rgba(5,4,10,0) 24%,rgba(5,4,10,0) 60%,var(--bg) 100%)}
 .hero-inner{position:relative;z-index:2;width:100%;min-width:0}
 .hero-logo{display:block;width:clamp(220px,27vw,360px);height:auto;margin:0 0 22px -6px;
   filter:drop-shadow(-4px 0 16px rgba(255,31,143,.55)) drop-shadow(4px 0 22px rgba(0,229,255,.32))}
@@ -259,7 +261,7 @@ footer .brand img{height:110px}
 }
 @media(max-width:600px){
   .hero{min-height:auto;align-items:flex-start;padding:38vh 0 56px}
-  .hero-media{width:100%;top:48px;bottom:auto;height:min(78vh,640px);
+  .hero-media{width:100%;top:var(--hero-top-m,48px);bottom:auto;height:min(78vh,640px);
     -webkit-mask-image:linear-gradient(180deg,transparent 0%,#000 14%,#000 62%,transparent 100%);mask-image:linear-gradient(180deg,transparent 0%,#000 14%,#000 62%,transparent 100%)}
   .hero-media img{object-position:var(--hero-pos-m,68% 0)}
   .hero-media::after{background:linear-gradient(180deg,rgba(5,4,10,0) 40%,rgba(5,4,10,.7) 85%)}
@@ -305,13 +307,13 @@ footer .brand img{height:110px}
 <section class="hero" id="inicio">
   <!-- FOTO HERO: para cambiarla sustituye assets/hero-vicente.jpg (escritorio, 1200-1600px de ancho)
        y assets/hero-vicente-m.jpg (móvil, ~800px) y actualiza width/height. Si cambia el encuadre,
-       ajusta el foco con style="--hero-pos:center 25%;--hero-pos-m:68% 0" en .hero-media -->
-  <div class="hero-media">
+       ajusta el foco con --hero-pos/--hero-pos-m (y --hero-fade, --hero-top-m, --hero-filter) en el style de .hero-media -->
+  <div class="hero-media" style="--hero-pos:40% 28%;--hero-pos-m:8% 0%;--hero-fade:34%;--hero-top-m:0px;--hero-filter:saturate(.95) brightness(.86) contrast(1.05)">
     <picture>
-      <source media="(max-width:600px)" srcset="assets/hero-vicente-m.webp" type="image/webp" width="744" height="800">
-      <source media="(max-width:600px)" srcset="assets/hero-vicente-m.jpg" width="744" height="800">
-      <source srcset="assets/hero-vicente.webp" type="image/webp" width="1190" height="1280">
-      <img src="assets/hero-vicente.jpg" alt="" width="1190" height="1280" fetchpriority="high">
+      <source media="(max-width:600px)" srcset="assets/hero-vicente-m.webp" type="image/webp" width="900" height="1182">
+      <source media="(max-width:600px)" srcset="assets/hero-vicente-m.jpg" width="900" height="1182">
+      <source srcset="assets/hero-vicente.webp" type="image/webp" width="1066" height="1400">
+      <img src="assets/hero-vicente.jpg" alt="" width="1066" height="1400" fetchpriority="high">
     </picture>
   </div>
   <div class="wrap hero-inner">
