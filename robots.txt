@@ -1,0 +1,33 @@
+# Vicente One More Time · robots.txt
+User-agent: *
+Allow: /
+
+# Buscadores e IA generativa (GEO): acceso permitido
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: Claude-User
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+Sitemap: https://nexusforgeia.github.io/WHITEMOON-VICENTE-OMT/sitemap.xml
