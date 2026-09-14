@@ -198,9 +198,14 @@ header.scrolled{background:rgba(5,4,10,.82);backdrop-filter:blur(14px);border-bo
 .stat .l{font-size:.72rem;letter-spacing:.14em;color:var(--muted);text-transform:uppercase}
 
 /* MERCH */
-.merch{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:center;background:linear-gradient(120deg,var(--panel),#0a0814);border:1px solid var(--line);border-radius:20px;overflow:hidden}
-.merch img{width:100%;height:100%;object-fit:cover;min-height:280px}
-.merch .mc{padding:44px}
+.merch-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.pcard{background:var(--panel);border:1px solid var(--line);border-radius:14px;overflow:hidden;display:flex;flex-direction:column;transition:.25s}
+.pcard:hover{border-color:var(--neon2);transform:translateY(-4px);box-shadow:0 20px 50px -20px rgba(0,229,255,.3)}
+.pcard img{width:100%;aspect-ratio:4/5;object-fit:cover;display:block}
+.pcard .pc{padding:24px;display:flex;flex-direction:column;gap:14px;flex:1}
+.pcard .pc h3{font-family:'Sora';font-weight:600;font-size:1.15rem;text-transform:none;margin:0}
+.pcard .price{font-family:'Syncopate';font-size:1.5rem;font-weight:700;margin-top:auto}
+.pcard .btn{width:100%;justify-content:center}
 
 /* CONTACT */
 .ct{display:grid;grid-template-columns:1fr 1fr;gap:44px}
@@ -264,9 +269,9 @@ footer .brand img{height:110px}
   .burger{display:block}
   #mnav.open{display:flex;flex-direction:column;gap:4px;padding:14px 24px 22px;background:rgba(5,4,10,.96);border-bottom:1px solid var(--line)}
   #mnav a{padding:12px 0;color:var(--muted);letter-spacing:.14em;font-size:.82rem;text-transform:uppercase;border-bottom:1px solid var(--line)}
-  .bio,.merch,.ct{grid-template-columns:1fr}
+  .bio,.ct{grid-template-columns:1fr}
+  .merch-grid{grid-template-columns:1fr 1fr}
   .bio-photo{max-width:520px;position:relative;top:auto}
-  .merch img{min-height:220px}
   .block{padding:70px 0}
   .brand img{height:46px}
   .hero-media{width:80%}
@@ -291,6 +296,7 @@ footer .brand img{height:110px}
   }
   .msgs{ min-height:0; }               /* que el area de mensajes pueda encoger y hacer scroll */
   .fab{ right:16px; bottom:16px; }     /* el boton queda justo debajo del chat, sin taparlo */
+  .merch-grid{grid-template-columns:1fr}
   /* chips en una sola fila con scroll horizontal: no roban alto al saludo */
   .chips{ flex-wrap:nowrap; overflow-x:auto; -webkit-overflow-scrolling:touch; scrollbar-width:none; }
   .chips::-webkit-scrollbar{ display:none; }
@@ -511,17 +517,19 @@ footer .brand img{height:110px}
 <section class="block" id="merch">
   <div class="wrap">
     <div class="head"><span class="eyebrow">Tienda</span><h2 class="sec-title">Llévate el <em>movimiento</em></h2></div>
-    <div class="merch">
-      <picture>
-        <source srcset="assets/img/merch-vomt.webp" type="image/webp">
-        <img src="assets/img/merch-vomt.jpg" alt="Merchandising oficial de Vicente One More Time: camiseta, polo, sudadera, llavero y parche" width="800" height="903" loading="lazy" decoding="async">
-      </picture>
-      <div class="mc">
-        <h3 style="font-size:1.4rem;margin-bottom:12px;text-transform:none;font-family:'Sora'">Tu merchan de Vicente OMT</h3>
-        <p style="color:var(--muted);margin-bottom:22px">Merch oficial y música en descarga. Pago seguro con tarjeta — checkout moderno con Stripe.</p>
-        <div style="font-family:'Syncopate';font-size:2rem;font-weight:700;margin-bottom:22px">40,00€</div>
-        <a href="#" class="btn btn-primary">Ir a la tienda</a>
-      </div>
+    <div class="merch-grid">
+      <article class="pcard">
+        <picture><source srcset="assets/img/merch-camiseta.webp" type="image/webp"><img src="assets/img/merch-camiseta.jpg" alt="Camiseta oficial de Vicente One More Time" width="700" height="790" loading="lazy" decoding="async"></picture>
+        <div class="pc"><h3>Camiseta oficial VOMT</h3><div class="price">19,99€</div><a href="#" class="btn btn-primary">Comprar</a></div>
+      </article>
+      <article class="pcard">
+        <picture><source srcset="assets/img/merch-polo.webp" type="image/webp"><img src="assets/img/merch-polo.jpg" alt="Polo oficial de Vicente One More Time" width="700" height="790" loading="lazy" decoding="async"></picture>
+        <div class="pc"><h3>Polo oficial VOMT</h3><div class="price">29,99€</div><a href="#" class="btn btn-primary">Comprar</a></div>
+      </article>
+      <article class="pcard">
+        <picture><source srcset="assets/img/merch-sudadera.webp" type="image/webp"><img src="assets/img/merch-sudadera.jpg" alt="Sudadera oficial de Vicente One More Time" width="700" height="790" loading="lazy" decoding="async"></picture>
+        <div class="pc"><h3>Sudadera oficial VOMT</h3><div class="price">39,99€</div><a href="#" class="btn btn-primary">Comprar</a></div>
+      </article>
     </div>
   </div>
 </section>
