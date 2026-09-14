@@ -36,13 +36,11 @@ Datos verificados del artista:
 - Management y booking: Sandra · sandra@mainanmusic.com · +34 663 953 036
 - Disponible para festivales, salas y eventos privados
 
-## Música
-
-- [Spotify](https://open.spotify.com/artist/2fBNX2F6x9P2tdJGKbTaPa)
-- [SoundCloud](https://soundcloud.com/vicenteonemoretime)
-- [YouTube](https://www.youtube.com/c/vicenteomt)
-
-## Redes
+## Redes y música
 
 - [Instagram](https://www.instagram.com/vicenteonemoretime/)
 - [Facebook](https://www.facebook.com/vicenteonemoretime/)
+- [X](https://x.com/vicente_omt)
+- [SoundCloud](https://soundcloud.com/vicenteonemoretime)
+- [Spotify](https://open.spotify.com/artist/2fBNX2F6x9P2tdJGKbTaPa)
+- [YouTube](https://www.youtube.com/@vicenteomt)
