@@ -91,7 +91,7 @@ function systemPrompt(eventos: Evento[], hoy: string, agendaOk: boolean): string
 - Mejor Artista Hardstyle en los Vicious Music Awards 2014 y 2015. Pionero en llevar el hardstyle a Ibiza.
 - Ha pinchado en Fabrik, Dreambeach, Medusa Sunbeach, In-Qontrol (Holanda), Amnesia (Suiza), Animal Sound, 4Every1 Festival y Techno House Festival.
 - Temas: Musika Maestro, Bailar Sin Parar, Chalaos, Desastre Nuclear, El Sonido de los Druidas, Esto No Es Bambi y La Noche Te Equivoca.
-- Redes y música: Instagram https://www.instagram.com/vicenteonemoretime/ · Facebook https://www.facebook.com/vicenteonemoretime/ · X https://x.com/vicente_omt · SoundCloud https://soundcloud.com/vicenteonemoretime · Spotify https://open.spotify.com/artist/2fBNX2F6x9P2tdJGKbTaPa · YouTube https://www.youtube.com/@vicenteomt
+- Redes y música: Instagram https://www.instagram.com/vicenteonemoretime/ · Facebook https://www.facebook.com/vicenteonemoretime/ · X https://x.com/vicente_omt · TikTok https://www.tiktok.com/@vicenteomt · SoundCloud https://soundcloud.com/vicenteonemoretime · Spotify https://open.spotify.com/artist/2fBNX2F6x9P2tdJGKbTaPa · YouTube https://www.youtube.com/@vicenteomt
 - Booking y management: ${BOOKING}
 </artista>
 
